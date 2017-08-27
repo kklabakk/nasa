@@ -65,6 +65,26 @@ class NeoRepository extends EntityRepository
 
     /**
      * @param bool $isHazardous
+     * @return mixed
+     */
+    public function findMonthWithMostRecords(bool $isHazardous = false)
+    {
+        $sql = "select monthname(approach_at) month from neo where is_hazardous=:isHazardous group by monthname(approach_at) order by count(id) desc limit 1";
+        $params = [
+            'isHazardous' => $isHazardous
+        ];
+
+        $em = $this->getEntityManager();
+        $stmt = $em->getConnection()->prepare($sql);
+        $stmt->execute($params);
+
+        $result = $stmt->fetchAll();
+
+        return $result[0]['month'];
+    }
+
+    /**
+     * @param bool $isHazardous
      * @return bool
      */
     public function referenceExists(int $reference)

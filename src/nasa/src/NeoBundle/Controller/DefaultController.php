@@ -55,4 +55,20 @@ class DefaultController extends Controller
 
         return $this->json([ 'year' => $year ]);
     }
+
+    /**
+     * Month with most ateroids
+     *
+     * Calculate and return a month with most ateroids
+     *
+     * @Route("/neo/best-month")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function bestMonthAction(Request $request)
+    {
+        $neoRepository = $this->get('neo.repository');
+        $month = $neoRepository->findMonthWithMostRecords($request->get('hazardous', 'false') === 'true');
+
+        return $this->json([ 'month' => $month ]);
+    }
 }
