@@ -8,9 +8,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class DefaultController extends Controller
 {
     /**
-     * potentially hazardous asteroids
+     * Potentially hazardous asteroids
      *
-     * display all DB entries which contain potentially hazardous asteroids
+     * Display all DB entries which contain potentially hazardous asteroids
      *
      * @Route("/neo/hazardous")
      * @return \Symfony\Component\HttpFoundation\Response
