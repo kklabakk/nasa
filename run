@@ -18,6 +18,15 @@ else
     printf "not running mongodb\n"
 fi
 
+read -p "Do you want to run mysql-server y/N? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo    # (optional) move to a new line
+    docker run --name mysql-server -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --network isolated -d mysql
+else
+    printf "not running mysql\n"
+fi
+
 if [ -n "$1" ]; then
    VERSION=$1
 else
