@@ -18,6 +18,6 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->json([ 'hello' => 'world!' ]);
+        return $this->json([ 'hello' => 'neo world!' ]);
     }
 }
