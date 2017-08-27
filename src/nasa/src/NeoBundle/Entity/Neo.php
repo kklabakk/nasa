@@ -56,7 +56,7 @@ class Neo implements \JsonSerializable
     private $speed;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_hazardous", type="boolean")
      */
@@ -209,7 +209,7 @@ class Neo implements \JsonSerializable
     /**
      * Set isHazardous
      *
-     * @param boolean $isHazardous
+     * @param bool $isHazardous
      *
      * @return Neo
      */
@@ -223,7 +223,7 @@ class Neo implements \JsonSerializable
     /**
      * Get isHazardous
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsHazardous()
     {

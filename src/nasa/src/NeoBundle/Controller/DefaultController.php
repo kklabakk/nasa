@@ -3,6 +3,7 @@
 namespace NeoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class DefaultController extends Controller
@@ -21,5 +22,21 @@ class DefaultController extends Controller
         $hazardous = $neoRepository->findAllHazardous();
 
         return $this->json($hazardous);
+    }
+
+    /**
+     * The fastest ateroid
+     *
+     * Calculate and return the model of the fastest ateroid
+     *
+     * @Route("/neo/fastest")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function fastestAction(Request $request)
+    {
+        $neoRepository = $this->get('neo.repository');
+        $fastest = $neoRepository->findFastest($request->get('hazardous', false));
+
+        return $this->json($fastest);
     }
 }

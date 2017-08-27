@@ -27,7 +27,24 @@ class NeoRepository extends EntityRepository
         return $queryBuilder->getQuery()->getResult();
     }
 
-    public function referenceExists($reference)
+    /**
+     * @return mixed
+     */
+    public function findFastest(bool $isHazardous = false)
+    {
+        return $this->createQueryBuilder('n')
+            ->where('n.isHazardous=:isHazardous')
+            ->setParameter('isHazardous', $isHazardous)
+            ->orderBy('n.speed', 'desc')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return bool
+     */
+    public function referenceExists(int $reference)
     {
         return $this->createQueryBuilder('n')
             ->select('count(n.id)')
