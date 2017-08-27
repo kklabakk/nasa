@@ -8,10 +8,18 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/neo")
+     * potentially hazardous asteroids
+     *
+     * display all DB entries which contain potentially hazardous asteroids
+     *
+     * @Route("/neo/hazardous")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function hazardousAction()
     {
-        return $this->render('NeoBundle:Default:index.html.twig');
+        $neoRepository = $this->get('neo.repository');
+        $hazardous = $neoRepository->findAllHazardous();
+
+        return $this->json($hazardous);
     }
 }

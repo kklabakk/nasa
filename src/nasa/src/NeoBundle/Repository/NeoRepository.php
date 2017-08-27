@@ -22,9 +22,9 @@ class NeoRepository extends EntityRepository
     {
         $queryBuilder = $this->createQueryBuilder('n');
 
-        $queryBuilder->where('u.isHazardous is true');
+        $queryBuilder->where('n.isHazardous = true');
 
-        return $queryBuilder->getQuery()->getResults();
+        return $queryBuilder->getQuery()->getResult();
     }
 
     public function referenceExists($reference)

@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="neo")
  * @ORM\Entity(repositoryClass="NeoBundle\Repository\NeoRepository")
  */
-class Neo
+class Neo implements \JsonSerializable
 {
     /**
      * @var id
@@ -228,5 +228,16 @@ class Neo
     public function getIsHazardous()
     {
         return $this->isHazardous;
+    }
+
+    public function jsonSerialize()
+    {
+        return array(
+            'reference' => $this->getReference(),
+            'name' => $this->getName(),
+            'approachAt' => $this->getApproachAt(),
+            'speed' => $this->getSpeed(),
+            'isHazardous'=> $this->getIsHazardous(),
+        );
     }
 }
