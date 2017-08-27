@@ -35,7 +35,7 @@ class DefaultController extends Controller
     public function fastestAction(Request $request)
     {
         $neoRepository = $this->get('neo.repository');
-        $fastest = $neoRepository->findFastest($request->get('hazardous', false));
+        $fastest = $neoRepository->findFastest($request->get('hazardous', 'false') === 'true');
 
         return $this->json($fastest);
     }

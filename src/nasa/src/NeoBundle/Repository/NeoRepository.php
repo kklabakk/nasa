@@ -38,7 +38,7 @@ class NeoRepository extends EntityRepository
             ->orderBy('n.speed', 'desc')
             ->setMaxResults(1)
             ->getQuery()
-            ->getResult();
+            ->getOneOrNullResult();
     }
 
     /**
