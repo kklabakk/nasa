@@ -54,9 +54,15 @@ class Import
         $this->days = $days;
     }
 
-    public function import()
+    public function import(\DateTime $start = null, \DateTime $end = null)
     {
-        $result = json_decode($this->buzz->get($this->getUrl())->getContent(), true);
+        if ($start === null || $end === null) {
+            $end = new \DateTime();
+            $start = new \DateTime();
+            $start->sub(new \DateInterval('P' . ($this->days - 1) . 'D'));
+        }
+
+        $result = json_decode($this->buzz->get($this->getUrl($start, $end))->getContent(), true);
 
         if ($this->analyze($result)) {
             $this->process($result['near_earth_objects']);
@@ -109,12 +115,8 @@ class Import
         }
     }
 
-    private function getUrl()
+    private function getUrl(\DateTime $start, \DateTime $end)
     {
-        $end = new \DateTime();
-        $start = new \DateTime();
-        $start->sub(new \DateInterval('P' . ($this->days - 1) . 'D'));
-
         return str_replace(
             '##key##',
             $this->key,
