@@ -46,3 +46,14 @@ It shall be automatic on dev-server start - it takes time for the first run, so 
 If it does not run automatically by some reason in dev-server in /nasa there shall be a ./nasa-start
 If errors occured they shall be in /nasa/nasa.initialization.log
 While waiting you can tail -f /nasa/nasa.initialization.log
+
+## DB
+
+For now it's with mysql - mongo is not supported with php 7.1 and the ports were not working
+at the moment of implementation. Did not want to waste time on this so I can provide solution
+faster. If mongo is required will downgrade php or try to patch something to make it work.
+
+Current implementation is almost always with doctrine - so mongo in case it works shall be
+pretty smooth transition. Best Month and Best Year are done right now with pure sql just
+to show off - in case of mongo they can be done in a generic way or with pure js inside
+mongo queries.
