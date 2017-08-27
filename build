@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [ -n "$1" ]; then
    VERSION=$1
 else
@@ -24,12 +26,4 @@ docker images | grep app/server
 
 printf "\n\n"
 
-read -p "Do you want to run image with version $VERSION y/N? " -n 1 -r
-echo    # (optional) move to a new line
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo    # (optional) move to a new line
-    docker run --name dev-server -p 8080:80 -v $(pwd)/src:/var/www/html -d app/server:$VERSION
-    docker exec -it dev-server bash
-else
-    printf "\n\nWhat is next:\n\tdocker run --name dev-server -p 8080:80 -v $(pwd)/src:/var/www/html -d app/server:$VERSION\n\tdocker exec -it dev-server bash"
-fi
+./run $VERSION
