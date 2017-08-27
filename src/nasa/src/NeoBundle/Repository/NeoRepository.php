@@ -28,6 +28,7 @@ class NeoRepository extends EntityRepository
     }
 
     /**
+     * @param bool $isHazardous
      * @return mixed
      */
     public function findFastest(bool $isHazardous = false)
@@ -42,6 +43,7 @@ class NeoRepository extends EntityRepository
     }
 
     /**
+     * @param bool $isHazardous
      * @return bool
      */
     public function referenceExists(int $reference)
