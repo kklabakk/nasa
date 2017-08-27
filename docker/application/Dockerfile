@@ -36,6 +36,17 @@ RUN \
   curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony && \
   chmod a+x /usr/local/bin/symfony
 
+# Update composer
+RUN \
+  cd /var/www/html/nasa && \
+  composer update
+
+# Create DB and run all migrations
+RUN \
+  cd /var/www/html/nasa && \
+  bin/console doctrine:database:create && \
+  bin/console doctrine:migrations:migrate -n
+
 # Define mountable directories.
 VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx"]
 
