@@ -54,6 +54,14 @@ class Import
         $this->days = $days;
     }
 
+    /**
+     * Imports data from nasa.api to DB
+     *
+     * If not passed will take %api.nasa.gov_days.to.import% days from the current day
+     *
+     * @param \DateTime $start
+     * @param \DateTime $end
+     */
     public function import(\DateTime $start = null, \DateTime $end = null)
     {
         if ($start === null || $end === null) {
