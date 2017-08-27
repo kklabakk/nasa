@@ -16,6 +16,12 @@ RUN \
   apt-get install -y php7.1-fpm php7.1 php7.1-xml php7.1-intl php7.1-mysql php7.1-bz2 php7.1-zip php7.1-curl > /dev/null 2>&1 && \
   echo "cgi.fix_pathinfo=0" >> /etc/php/7.1/fpm/php.ini
 
+# Install phpunit
+RUN \
+  wget https://phar.phpunit.de/phpunit-6.2.phar && \
+  chmod +x phpunit-6.2.phar && \
+  mv phpunit-6.2.phar /usr/bin/phpunit
+
 # Install Nginx.
 RUN \
   apt-get install -y nginx > /dev/null 2>&1 && \
