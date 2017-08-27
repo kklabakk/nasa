@@ -79,7 +79,7 @@ class Neo
      *
      * @return Neo
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
 
@@ -103,9 +103,23 @@ class Neo
      *
      * @return Neo
      */
-    public function setApproachAt($approachAt)
+    public function setApproachAt(\DateTime $approachAt)
     {
         $this->approachAt = $approachAt;
+
+        return $this;
+    }
+
+    /**
+     * Set approachAt as string
+     *
+     * @param string $approachAt
+
+     * @return Neo
+     */
+    public function setApproachAtAsString(string $approachAtAsString)
+    {
+        $this->setApproachAt(\DateTime::createFromFormat('Y-m-d', $approachAtAsString));
 
         return $this;
     }

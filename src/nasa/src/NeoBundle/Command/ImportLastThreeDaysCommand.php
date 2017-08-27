@@ -7,7 +7,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 
-use NeoBundle\Entity\Neo;
+use NeoBundle\Service\Importer;
+use NeoBundle\Exception\NeoImportStructureInvalidException;
 
 class ImportLastThreeDaysCommand extends ContainerAwareCommand
 {
@@ -22,20 +23,19 @@ class ImportLastThreeDaysCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln("<info>Import last 3 days from nasa api...</info>");
+        $output->writeln("");
 
+        /** @var NeoBundle\Service\Importer $neoImporter */
+        $neoImporter = $this->getContainer()->get('neo.import');
 
-        $em = $this->getContainer()->get('doctrine')->getManager();
+        try {
+            $neoImporter->import();
 
-        $product = new Neo();
-        $product->setName('Keyboard');
-        $product->setReference(1);
-        $product->setApproachAt(new \DateTime());
-        $product->setSpeed(doubleval(2.04));
-        $product->setIsHazardous(true);
-
-        $em->persist($product);
-
-        $em->flush();
-
+            $output->writeln("<info>Import complete!</info>");
+        } catch (NeoImportStructureInvalidException $e) {
+            $output->writeln("<error>Import failed: structure invalid!</error>");
+        } catch (\Buzz\Exception\RequestException $e) {
+            $output->writeln("<error>Import failed: invalid url!</error>");
+        }
     }
 }

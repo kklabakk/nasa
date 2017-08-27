@@ -6,14 +6,14 @@ MAINTAINER Ivaylo Iliev <ranapat@yahoo.com>
 # Install base packages
 RUN \
   apt-get update > /dev/null 2>&1 && \
-  apt-get install -y curl wget apt-transport-https lsb-release ca-certificates zip unzip > /dev/null 2>&1
+  apt-get install -y curl wget apt-transport-https lsb-release ca-certificates zip unzip git > /dev/null 2>&1
 
 # Install php7.1
 RUN \
   wget -nv -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg > /dev/null 2>&1 && \
   echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list && \
   apt-get update > /dev/null 2>&1 && \
-  apt-get install -y php7.1-fpm php7.1 php7.1-xml php7.1-intl php7.1-mysql php7.1-bz2 php7.1-zip > /dev/null 2>&1 && \
+  apt-get install -y php7.1-fpm php7.1 php7.1-xml php7.1-intl php7.1-mysql php7.1-bz2 php7.1-zip php7.1-curl > /dev/null 2>&1 && \
   echo "cgi.fix_pathinfo=0" >> /etc/php/7.1/fpm/php.ini
 
 # Install Nginx.

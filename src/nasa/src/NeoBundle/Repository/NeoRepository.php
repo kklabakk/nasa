@@ -10,7 +10,7 @@ use NeoBundle\Entity\Neo;
 /**
  * Neo Repository
  */
-class UserRepository extends EntityRepository
+class NeoRepository extends EntityRepository
 {
     /**
      * @return mixed
@@ -25,5 +25,15 @@ class UserRepository extends EntityRepository
         $queryBuilder->where('u.isHazardous is true');
 
         return $queryBuilder->getQuery()->getResults();
+    }
+
+    public function referenceExists($reference)
+    {
+        return $this->createQueryBuilder('n')
+            ->select('count(n.id)')
+            ->where('n.reference=:reference')
+            ->setParameter('reference', $reference)
+            ->getQuery()
+            ->getSingleScalarResult() == 0;
     }
 }
