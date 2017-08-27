@@ -36,31 +36,19 @@ RUN \
   curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony && \
   chmod a+x /usr/local/bin/symfony
 
-# Update composer
-RUN \
-  cd /var/www/html/nasa && \
-  composer update
-
-# Create DB and run all migrations
-RUN \
-  cd /var/www/html/nasa && \
-  bin/console doctrine:database:create && \
-  bin/console doctrine:migrations:migrate -n
-
 # Define mountable directories.
 VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx"]
 
 RUN \
   rm /var/www/html/*
 
+COPY nasa.start /nasa/nasa.start
+
 # Define working directory.
 WORKDIR /var/www/html
 
 # Define default command.
-CMD \
-  /etc/init.d/nginx start & \
-  /etc/init.d/php7.1-fpm start & \
-  tail -f /var/log/dmesg
+CMD /nasa/nasa.start
 
 # Expose ports.
 EXPOSE 80

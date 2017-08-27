@@ -5,8 +5,9 @@ echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo    # (optional) move to a new line
     docker network create --driver bridge isolated
+    printf "\n\nisolated network created\n\n"
 else
-    printf "not creating isolated network\n"
+    printf "not creating isolated network\n\n"
 fi
 
 read -p "Do you want to run mongodb-server y/N? " -n 1 -r
@@ -14,8 +15,9 @@ echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo    # (optional) move to a new line
     docker run --name mongodb-server -p 27017:27017 --network isolated -d mongo
+    printf "\n\nmongodb-server runned\n\n"
 else
-    printf "not running mongodb\n"
+    printf "not running mongodb\n\n"
 fi
 
 read -p "Do you want to run mysql-server y/N? " -n 1 -r
@@ -23,8 +25,9 @@ echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo    # (optional) move to a new line
     docker run --name mysql-server -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root --network isolated -d mysql
+    printf "\n\nmysql-server runned\n\n"
 else
-    printf "not running mysql\n"
+    printf "not running mysql\n\n"
 fi
 
 if [ -n "$1" ]; then
@@ -50,5 +53,5 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     docker run --name dev-server -p 8080:80 -v $(pwd)/src:/var/www/html --network isolated -d app/server:$VERSION
     docker exec -it dev-server bash
 else
-    printf "not running app/server:$VERSION\n"
+    printf "not running app/server:$VERSION\n\n"
 fi
