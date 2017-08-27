@@ -1,24 +1,17 @@
-# This file is a "template" of what your parameters.yml file should look like
-# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
-# https://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
-    database_host: 127.0.0.1
-    database_port: ~
-    database_name: symfony
+    database_host: mysql-server
+    database_port: null
+    database_name: nasa
     database_user: root
-    database_password: ~
-    # You should uncomment this if you want to use pdo_sqlite
-    #database_path: '%kernel.project_dir%/var/data/data.sqlite'
+    database_password: root
 
     mailer_transport: smtp
     mailer_host: 127.0.0.1
-    mailer_user: ~
-    mailer_password: ~
+    mailer_user: null
+    mailer_password: null
 
-    # A secret key that's used to generate certain security-related tokens
-    secret: ThisTokenIsNotSoSecretChangeIt
+    secret: cf233f176764566c86c773bde2b63354eca16ed1
 
-    # Nasa api key
     api.nasa.gov_api.key: N7LkblDsc5aen05FJqBQ8wU4qSdmsftwJagVK7UD
     api.nasa.gov_import.url: https://api.nasa.gov/neo/rest/v1/feed?start_date=##start##&end_date=##end##&detailed=false&api_key=##key##
     api.nasa.gov_days.to.import: 3
