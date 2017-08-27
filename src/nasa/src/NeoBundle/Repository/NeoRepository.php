@@ -4,6 +4,7 @@ namespace NeoBundle\Repository;
 
 use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 use NeoBundle\Entity\Neo;
 
@@ -40,6 +41,26 @@ class NeoRepository extends EntityRepository
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    /**
+     * @param bool $isHazardous
+     * @return mixed
+     */
+    public function findYearWithMostRecords(bool $isHazardous = false)
+    {
+        $sql = "select year(approach_at) year from neo where is_hazardous=:isHazardous group by year(approach_at) order by count(id) desc limit 1";
+        $params = [
+            'isHazardous' => $isHazardous
+        ];
+
+        $em = $this->getEntityManager();
+        $stmt = $em->getConnection()->prepare($sql);
+        $stmt->execute($params);
+
+        $result = $stmt->fetchAll();
+
+        return $result[0]['year'];
     }
 
     /**

@@ -39,4 +39,20 @@ class DefaultController extends Controller
 
         return $this->json($fastest);
     }
+
+    /**
+     * Year with most ateroids
+     *
+     * Calculate and return a year with most ateroids
+     *
+     * @Route("/neo/best-year")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function bestYearAction(Request $request)
+    {
+        $neoRepository = $this->get('neo.repository');
+        $year = $neoRepository->findYearWithMostRecords($request->get('hazardous', 'false') === 'true');
+
+        return $this->json([ 'year' => $year ]);
+    }
 }
