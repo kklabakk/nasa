@@ -60,7 +60,7 @@ class NeoRepository extends EntityRepository
 
         $result = $stmt->fetchAll();
 
-        return $result[0]['year'];
+        return count($result) > 0 ? $result[0]['year'] : null;
     }
 
     /**
@@ -80,7 +80,7 @@ class NeoRepository extends EntityRepository
 
         $result = $stmt->fetchAll();
 
-        return $result[0]['month'];
+        return count($result) > 0 ? $result[0]['month'] : null;
     }
 
     /**
