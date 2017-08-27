@@ -57,3 +57,8 @@ Current implementation is almost always with doctrine - so mongo in case it work
 pretty smooth transition. Best Month and Best Year are done right now with pure sql just
 to show off - in case of mongo they can be done in a generic way or with pure js inside
 mongo queries.
+
+## Commands
+
+- bin/console neo:import:lastThreeDays - gets the latest 3 days
+- bin/console neo:import:variableDays <int> - gets as many as you want
