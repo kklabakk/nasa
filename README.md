@@ -70,3 +70,9 @@ docker exec -it dev-server bash
 or if you created it without ./build script
 
 docker exec -it <image> bash
+
+## Run tests
+
+- enter bash in dev-server
+- enter nasa in /var/www/html
+- run phpunit
