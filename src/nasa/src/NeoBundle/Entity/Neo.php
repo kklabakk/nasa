@@ -119,7 +119,9 @@ class Neo implements \JsonSerializable
      */
     public function setApproachAtAsString(string $approachAtAsString)
     {
-        $this->setApproachAt(\DateTime::createFromFormat('Y-m-d', $approachAtAsString));
+        $date = \DateTime::createFromFormat('Y-m-d', $approachAtAsString);
+        $date->setTime(0, 0, 0, 0);
+        $this->setApproachAt($date);
 
         return $this;
     }
