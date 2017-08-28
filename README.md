@@ -62,3 +62,11 @@ mongo queries.
 
 - bin/console neo:import:lastThreeDays - gets the latest 3 days
 - bin/console neo:import:variableDays <int> - gets as many as you want
+
+## Access dev-server
+
+docker exec -it dev-server bash
+
+or if you created it without ./build script
+
+docker exec -it <image> bash
