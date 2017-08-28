@@ -4,6 +4,8 @@ namespace NeoBundle\Service;
 
 use Doctrine\ORM\EntityManager;
 
+use Buzz\Browser;
+
 use NeoBundle\Entity\Neo;
 use NeoBundle\Repository\NeoRepository;
 use NeoBundle\Exception\NeoImportStructureInvalidException;
@@ -16,7 +18,7 @@ class Import
     private $em;
 
     /**
-     * @var \Buzz\Browser
+     * @var Browser
      */
     private $buzz;
 
@@ -42,7 +44,7 @@ class Import
 
     public function __construct(
         EntityManager $em,
-        \Buzz\Browser $buzz,
+        Browser $buzz,
         NeoRepository $neoRepository,
         string $key, string $url, int $days)
     {
